@@ -28,7 +28,7 @@ if (project.rootProject.file('local.properties').exists()) {
 
                     // Add your description here
                     name 'fingerprint-dialog-compat'  //Name of the repo
-                    description = 'FingerprintDialog from Android 28 (P) back ported to Android 23 (M).'
+                    description = 'FingerprintDialog from Android 34 (P) back ported to Android 24 (M).'
                     url siteUrl
 
                     // Set your license

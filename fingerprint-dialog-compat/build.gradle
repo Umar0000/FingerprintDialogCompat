@@ -1,32 +1,25 @@
-/*
- * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
-
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.0'
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
+    compileSdkVersion 34
 
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 34
         consumerProguardFiles 'proguard-rules.pro'
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // This is important, it will run lint checks but won't abort build
     lintOptions {
         abortOnError false
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
     buildTypes {
         release {
@@ -36,11 +29,20 @@ android {
     }
 }
 
-dependencies {
-    implementation 'com.android.support:support-v4:28.0.0-alpha1'
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
 }
-apply from: 'bintray.gradle'
+
+dependencies {
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+// Remove bintray.gradle if not required or verify its configuration
